@@ -1,10 +1,11 @@
 import javax.swing.*;
 
 public class CalculatorUI {
+    private static JTextField indicator;
     public static void main(String... args) {
         JFrame myCalculator = new JFrame("MyCalculator");
 
-        JTextField indicator = new JTextField();
+        indicator = new JTextField();
         indicator.setEditable(false);
         indicator.setBounds(5, 5, 255, 50);
 
@@ -21,53 +22,26 @@ public class CalculatorUI {
         JButton minus = new JButton("-");
         minus.setBounds(200, 60, 60, 60);
 
-        JButton seven = new JButton("7");
-        seven.setBounds(5, 125, 60, 60);
-        seven.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + seven.getText()));
+        JButton seven = getPositiveIntegerNumberButton("7", 5, 125);
 
-        JButton eight = new JButton("8");
-        eight.setBounds(70, 125, 60, 60);
-        eight.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + eight.getText()));
+        JButton eight = getPositiveIntegerNumberButton("8", 70, 125);
 
-        JButton nine = new JButton("9");
-        nine.setBounds(135, 125, 60, 60);
-        nine.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + nine.getText()));
+        JButton nine = getPositiveIntegerNumberButton("9", 135, 125);
 
         JButton plus = new JButton("+");
         plus.setBounds(200, 125, 60, 125);
 
-        JButton four = new JButton("4");
-        four.setBounds(5, 190, 60, 60);
-        four.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + four.getText()));
+        JButton four = getPositiveIntegerNumberButton("4", 5, 190);
 
-        JButton five = new JButton("5");
-        five.setBounds(70, 190, 60, 60);
-        five.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + five.getText()));
+        JButton five = getPositiveIntegerNumberButton("5", 70, 190);
 
-        JButton six = new JButton("6");
-        six.setBounds(135, 190, 60, 60);
-        six.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + six.getText()));
+        JButton six = getPositiveIntegerNumberButton("6", 135, 190);
 
-        JButton one = new JButton("1");
-        one.setBounds(5, 255, 60, 60);
-        one.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + one.getText()));
+        JButton one = getPositiveIntegerNumberButton("1", 5, 255);
 
-        JButton two = new JButton("2");
-        two.setBounds(70, 255, 60, 60);
-        two.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + two.getText()));
+        JButton two = getPositiveIntegerNumberButton("2", 70, 255);
 
-        JButton three = new JButton("3");
-        three.setBounds(135, 255, 60, 60);
-        three.addActionListener(event ->
-                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + three.getText()));
+        JButton three = getPositiveIntegerNumberButton("3", 135, 255);
 
         JButton equal = new JButton("=");
         equal.setBounds(200, 255, 60, 125);
@@ -102,5 +76,13 @@ public class CalculatorUI {
         myCalculator.setLayout(null);
         myCalculator.setSize(265, 425);
         myCalculator.setVisible(true);
+    }
+
+    private static JButton getPositiveIntegerNumberButton(String labelOfButton, int xPosition, int yPosition) {
+        JButton button = new JButton(labelOfButton);
+        button.setBounds(xPosition, yPosition, 60, 60);
+        button.addActionListener(event ->
+                indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + button.getText()));
+        return button;
     }
 }
