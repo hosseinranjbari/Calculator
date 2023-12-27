@@ -1,8 +1,15 @@
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.*;
 
 public class CalculatorUI {
     private static JTextField indicator;
+    private static String stringOfExpression = "";
     public static void main(String... args) {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("JavaScript");
+
         JFrame myCalculator = new JFrame("MyCalculator");
 
         indicator = new JTextField();
@@ -10,13 +17,28 @@ public class CalculatorUI {
         indicator.setBounds(5, 5, 255, 50);
 
         JButton cleaner = getOperatorButton("AC", 5, 60, 60);
-        cleaner.addActionListener(event -> indicator.setText(""));
+        cleaner.addActionListener(event -> {
+             stringOfExpression = "";
+            indicator.setText(stringOfExpression);
+        });
 
         JButton division = getOperatorButton("/", 70, 60, 60);
+        division.addActionListener(event -> {
+            stringOfExpression += "/" + indicator.getText();
+            indicator.setText(indicator.getText() + "/");
+        });
 
         JButton multiplication = getOperatorButton("*", 135, 60, 60);
+        multiplication.addActionListener(event -> {
+            stringOfExpression += "*" + indicator.getText();
+            indicator.setText(indicator.getText() + "*");
+        });
 
         JButton minus = getOperatorButton("-", 200, 60, 60);
+        minus.addActionListener(event -> {
+            stringOfExpression += "-" + indicator.getText();
+            indicator.setText(indicator.getText() + "-");
+        });
 
         JButton seven = getPositiveIntegerNumberButton("7", 5, 125);
 
@@ -25,6 +47,10 @@ public class CalculatorUI {
         JButton nine = getPositiveIntegerNumberButton("9", 135, 125);
 
         JButton plus = getOperatorButton("+", 200, 125, 125);
+        plus.addActionListener(event -> {
+            stringOfExpression += "+" + indicator.getText();
+            indicator.setText(indicator.getText() + "+");
+        });
 
         JButton four = getPositiveIntegerNumberButton("4", 5, 190);
 
@@ -39,6 +65,15 @@ public class CalculatorUI {
         JButton three = getPositiveIntegerNumberButton("3", 135, 255);
 
         JButton equal = getOperatorButton("=", 200, 255, 125);
+        equal.addActionListener(event -> {
+            try {
+                stringOfExpression = scriptEngine.eval(indicator.getText()).toString();
+                indicator.setText(stringOfExpression);
+            } catch (ScriptException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
 
         JButton zero = new JButton("0");
         zero.setBounds(5, 320, 125, 60);
