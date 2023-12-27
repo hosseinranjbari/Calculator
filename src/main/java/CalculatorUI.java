@@ -9,18 +9,14 @@ public class CalculatorUI {
         indicator.setEditable(false);
         indicator.setBounds(5, 5, 255, 50);
 
-        JButton cleaner = new JButton("AC");
-        cleaner.setBounds(5, 60, 60, 60);
+        JButton cleaner = getOperatorButton("AC", 5, 60, 60);
         cleaner.addActionListener(event -> indicator.setText(""));
 
-        JButton division = new JButton("/");
-        division.setBounds(70, 60, 60, 60);
+        JButton division = getOperatorButton("/", 70, 60, 60);
 
-        JButton multiplication = new JButton("*");
-        multiplication.setBounds(135, 60, 60, 60);
+        JButton multiplication = getOperatorButton("*", 135, 60, 60);
 
-        JButton minus = new JButton("-");
-        minus.setBounds(200, 60, 60, 60);
+        JButton minus = getOperatorButton("-", 200, 60, 60);
 
         JButton seven = getPositiveIntegerNumberButton("7", 5, 125);
 
@@ -28,8 +24,7 @@ public class CalculatorUI {
 
         JButton nine = getPositiveIntegerNumberButton("9", 135, 125);
 
-        JButton plus = new JButton("+");
-        plus.setBounds(200, 125, 60, 125);
+        JButton plus = getOperatorButton("+", 200, 125, 125);
 
         JButton four = getPositiveIntegerNumberButton("4", 5, 190);
 
@@ -43,8 +38,7 @@ public class CalculatorUI {
 
         JButton three = getPositiveIntegerNumberButton("3", 135, 255);
 
-        JButton equal = new JButton("=");
-        equal.setBounds(200, 255, 60, 125);
+        JButton equal = getOperatorButton("=", 200, 255, 125);
 
         JButton zero = new JButton("0");
         zero.setBounds(5, 320, 125, 60);
@@ -76,6 +70,13 @@ public class CalculatorUI {
         myCalculator.setLayout(null);
         myCalculator.setSize(265, 425);
         myCalculator.setVisible(true);
+    }
+
+    private static JButton getOperatorButton(
+            String labelOfOperator, int xPosition, int yPosition, int height) {
+        JButton operatorButton = new JButton(labelOfOperator);
+        operatorButton.setBounds(xPosition, yPosition, 60, height);
+        return operatorButton;
     }
 
     private static JButton getPositiveIntegerNumberButton(String labelOfButton, int xPosition, int yPosition) {
