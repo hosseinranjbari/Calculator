@@ -77,11 +77,11 @@ public class CalculatorUI {
 
         JButton zero = new JButton("0");
         zero.setBounds(5, 320, 125, 60);
-        zero.addActionListener(event -> indicator.setText(ZeroConditions.pressingZero(indicator.getText())));
+        zero.addActionListener(event -> indicator.setText(ZeroConditions.zeroChecker(indicator.getText())));
 
         JButton point = new JButton(".");
         point.setBounds(135, 320, 60, 60);
-        point.addActionListener(event -> indicator.setText(PointConditions.pressingPoint(indicator.getText())));
+        point.addActionListener(event -> indicator.setText(PointConditions.pointChecker(indicator.getText())));
 
         myCalculator.add(indicator);
         myCalculator.add(cleaner);

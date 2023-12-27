@@ -1,6 +1,6 @@
 public class ZeroConditions {
 
-    public static String pressingZero(String indicatorString) {
+    public static String zeroChecker(String indicatorString) {
         if(indicatorString.isEmpty()) {
             return "0";
 
