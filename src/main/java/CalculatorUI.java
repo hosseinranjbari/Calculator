@@ -4,37 +4,39 @@ import javax.script.ScriptException;
 import javax.swing.*;
 
 public class CalculatorUI {
+    public static final int WIDTH = 60;
+    public static final int HEIGHT = 60;
     private static JTextField indicator;
     private static String stringOfExpression = "";
     public static void main(String... args) {
-        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        final ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("JavaScript");
 
-        JFrame myCalculator = new JFrame("MyCalculator");
+        final JFrame myCalculator = new JFrame("MyCalculator");
 
         indicator = new JTextField();
         indicator.setEditable(false);
         indicator.setBounds(5, 5, 255, 50);
 
-        JButton cleaner = getOperatorButton("AC", 5, 60, 60);
+        JButton cleaner = getOperatorButton("AC", 5, 60, HEIGHT);
         cleaner.addActionListener(event -> {
              stringOfExpression = "";
             indicator.setText(stringOfExpression);
         });
 
-        JButton division = getOperatorButton("/", 70, 60, 60);
+        JButton division = getOperatorButton("/", 70, 60, HEIGHT);
         division.addActionListener(event -> {
             stringOfExpression += "/" + indicator.getText();
             indicator.setText(indicator.getText() + "/");
         });
 
-        JButton multiplication = getOperatorButton("*", 135, 60, 60);
+        JButton multiplication = getOperatorButton("*", 135, 60, HEIGHT);
         multiplication.addActionListener(event -> {
             stringOfExpression += "*" + indicator.getText();
             indicator.setText(indicator.getText() + "*");
         });
 
-        JButton minus = getOperatorButton("-", 200, 60, 60);
+        JButton minus = getOperatorButton("-", 200, 60, HEIGHT);
         minus.addActionListener(event -> {
             stringOfExpression += "-" + indicator.getText();
             indicator.setText(indicator.getText() + "-");
@@ -76,11 +78,11 @@ public class CalculatorUI {
         });
 
         JButton zero = new JButton("0");
-        zero.setBounds(5, 320, 125, 60);
+        zero.setBounds(5, 320, 125, HEIGHT);
         zero.addActionListener(event -> indicator.setText(ZeroConditions.zeroChecker(indicator.getText())));
 
         JButton point = new JButton(".");
-        point.setBounds(135, 320, 60, 60);
+        point.setBounds(135, 320, WIDTH, HEIGHT);
         point.addActionListener(event -> indicator.setText(PointConditions.pointChecker(indicator.getText())));
 
         myCalculator.add(indicator);
@@ -110,13 +112,13 @@ public class CalculatorUI {
     private static JButton getOperatorButton(
             String labelOfOperator, int xPosition, int yPosition, int height) {
         JButton operatorButton = new JButton(labelOfOperator);
-        operatorButton.setBounds(xPosition, yPosition, 60, height);
+        operatorButton.setBounds(xPosition, yPosition, WIDTH, height);
         return operatorButton;
     }
 
     private static JButton getPositiveIntegerNumberButton(String labelOfButton, int xPosition, int yPosition) {
         JButton button = new JButton(labelOfButton);
-        button.setBounds(xPosition, yPosition, 60, 60);
+        button.setBounds(xPosition, yPosition, WIDTH, HEIGHT);
         button.addActionListener(event ->
                 indicator.setText(ZeroConditions.removeStartingZero(indicator.getText()) + button.getText()));
         return button;
